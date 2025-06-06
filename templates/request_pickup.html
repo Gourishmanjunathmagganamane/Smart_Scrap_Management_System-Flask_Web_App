@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Request Pickup{% endblock %}
+
+{% block content %}
+    <h2>Request Pickup for: {{ item.scrap_type }} ({{ item.weight_kg }} kg)</h2>
+    <form method="POST" action="/request_pickup/{{ item.id }}">
+        <div class="form-group">
+            <label for="pickup_date">Desired Pickup Date:</label>
+            <input type="date" class="form-control" id="pickup_date" name="pickup_date" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Pickup Request</button>
+        <a href="{{ url_for('view_my_listings') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

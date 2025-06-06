@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block title %}Seller Dashboard{% endblock %}
+
+{% block content %}
+    <h2>Welcome, Seller!</h2>
+    <p>Select an action below:</p>
+    
+    <a href="{{ url_for('add_scrap_item') }}" class="btn btn-primary m-2">Add Scrap Item</a>
+    <a href="{{ url_for('view_my_listings') }}" class="btn btn-secondary m-2">View My Listings</a>
+{% endblock %}

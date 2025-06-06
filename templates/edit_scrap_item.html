@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Edit Scrap Item{% endblock %}
+
+{% block content %}
+    <h2>Edit Scrap Item</h2>
+    <form method="POST" action="/edit_scrap_item/{{ item.id }}">
+        <div class="form-group">
+            <label for="scrap_type">Scrap Type:</label>
+            <input type="text" class="form-control" id="scrap_type" name="scrap_type" value="{{ item.scrap_type }}" required>
+        </div>
+        <div class="form-group">
+            <label for="weight_kg">Weight (in kg):</label>
+            <input type="number" class="form-control" id="weight_kg" name="weight_kg" step="0.01" value="{{ item.weight_kg }}" required>
+        </div>
+        <div class="form-group">
+            <label for="price_per_kg">Price per kg:</label>
+            <input type="number" class="form-control" id="price_per_kg" name="price_per_kg" step="0.01" value="{{ item.price_per_kg }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Update Item</button>
+        <a href="{{ url_for('view_my_listings') }}" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}

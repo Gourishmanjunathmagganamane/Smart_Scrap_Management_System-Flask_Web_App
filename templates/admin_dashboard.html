@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h2>Admin Dashboard</h2>
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="card bg-light mb-3">
+            <div class="card-header">Total Users</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ total_users }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light mb-3">
+            <div class="card-header">Total Scrap Items Listed</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ total_scrap_items }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light mb-3">
+            <div class="card-header">Pending Pickup Requests</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ pending_pickups_count }}</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3">
+        <div class="card bg-light mb-3">
+            <div class="card-header">Total Transactions</div>
+            <div class="card-body">
+                <h4 class="card-title">{{ total_transactions }}</h4>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>All Pickup Requests</h3>
+{% if all_pickup_requests %}
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Seller</th>
+            <th>Item</th>
+            <th>Status</th>
+            <th>Assigned Agent</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in all_pickup_requests %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.seller.name }}</td>
+            <td>{{ request.scrap_item.scrap_type if request.scrap_item else 'N/A' }}</td>
+            <td>{{ request.status }}</td>
+            <td>{{ request.agent.name if request.agent else 'Not Assigned' }}</td>
+            <td>
+                <a href="{{ url_for('admin_view_pickup', request_id=request.id) }}" class="btn btn-info">Details</a>
+                {% if request.status == 'Pending' %}
+                <form action="{{ url_for('assign_agent', request_id=request.id) }}" method="POST" class="d-flex">
+                    <select name="agent_id" class="form-control mr-2" required>
+                        <option value="">Select Agent</option>
+                        {% for agent in pickup_agents %} {# Corrected variable name from 'agents' to 'pickup_agents' #}
+                        <option value="{{ agent.id }}">{{ agent.name }}</option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit" class="btn btn-primary">Assign Agent</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No pickup requests found.</p>
+{% endif %}
+{% endblock %}

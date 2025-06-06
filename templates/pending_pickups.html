@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block title %}Pending Pickups{% endblock %}
+
+{% block content %}
+    <h2>Your Pending Pickup Requests</h2>
+    {% if pending_requests %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Request Date</th>
+                    <th>Scrap Type</th>
+                    <th>Weight (kg)</th>
+                    <th>Desired Pickup Date</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for request in pending_requests %}
+                    <tr>
+                        <td>{{ request.request_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                        <td>{{ request.scrap_item.scrap_type }}</td>
+                        <td>{{ request.scrap_item.weight_kg }}</td>
+                        <td>{{ request.pickup_date }}</td>
+                        <td>{{ request.status }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no pending pickup requests.</p>
+    {% endif %}
+    <a href="{{ url_for('view_my_listings') }}" class="btn btn-secondary mt-3">Back to My Listings</a>
+{% endblock %}

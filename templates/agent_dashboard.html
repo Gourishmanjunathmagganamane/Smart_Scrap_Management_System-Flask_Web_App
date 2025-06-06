@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block title %}Agent Dashboard{% endblock %}
+
+{% block content %}
+<h2>Agent Dashboard</h2>
+{% with messages = get_flashed_messages(with_categories=true) %}
+{% if messages %}
+{% for category, message in messages %}
+<div class="alert alert-{{ category }} alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endfor %}
+{% endif %}
+{% endwith %}
+
+<h3>Assigned Pickup Requests</h3>
+{% if assigned_pickups %}
+<table class="table">
+    <thead>
+        <tr>
+            <th>Request ID</th>
+            <th>Seller</th>
+            <th>Scrap Type</th>
+            <th>Pickup Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for request in assigned_pickups %}
+        <tr>
+            <td>{{ request.id }}</td>
+            <td>{{ request.seller.name }}</td>
+            <td>{{ request.scrap_item.scrap_type }}</td>
+            <td>{{ request.pickup_date }}</td>
+            <td>{{ request.status }}</td>
+            <td>
+                <a href="{{ url_for('agent_pickup_details', request_id=request.id) }}" class="btn btn-info btn-sm">View Details</a>
+                {% if request.status in ['Assigned', 'In Transit', 'Arrived'] %}
+                <form action="{{ url_for('update_pickup_status', request_id=request.id) }}" method="POST" style="display:inline;">
+                    <select name="status" required>
+                        <option value="In Transit">In Transit</option>
+                        <option value="Arrived">Arrived</option>
+                        <option value="Completed">Completed</option>
+                        <option value="Failed">Failed</option>
+                        <option value="Cancelled">Cancelled</option>
+                    </select>
+                    <button type="submit" class="btn btn-primary btn-sm">Update Status</button>
+                </form>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>No pickup requests have been assigned to you yet.</p>
+{% endif %}
+{% endblock %}
