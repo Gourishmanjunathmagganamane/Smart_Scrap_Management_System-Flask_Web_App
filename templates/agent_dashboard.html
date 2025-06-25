@@ -3,6 +3,95 @@
 {% block title %}Agent Dashboard{% endblock %}
 
 {% block content %}
+<style>
+    /* Remove body background override so base.html controls it */
+    /* body {
+        background-color: #e8f5e9 !important;
+    } */
+    .earth-table th {
+        background: #388e3c;
+        color: #fff;
+        border-color: #388e3c;
+    }
+    .earth-table td {
+        background: #f1f8e9;
+        color: #2e7d32;
+    }
+    .btn-earth {
+        background-color: #388e3c;
+        color: #fff;
+        border: none;
+    }
+    .btn-earth:hover, .btn-earth:focus {
+        background-color: #2e7d32;
+        color: #fff;
+    }
+    .btn-info {
+        background-color: #43a047 !important;
+        border-color: #388e3c !important;
+        color: #fff !important;
+    }
+    .btn-info:hover, .btn-info:focus {
+        background-color: #2e7d32 !important;
+        border-color: #2e7d32 !important;
+        color: #fff !important;
+    }
+    .btn-primary {
+        background-color: #8bc34a !important;
+        border-color: #558b2f !important;
+        color: #1b5e20 !important;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: #558b2f !important;
+        border-color: #33691e !important;
+        color: #fff !important;
+    }
+    h2, h3 {
+        color: #1b5e20;
+    }
+    /* Dark mode overrides */
+    body.dark-mode .earth-table th {
+        background: #222 !important;
+        color: #ffd600 !important;
+        border-color: #ffd600 !important;
+    }
+    body.dark-mode .earth-table td {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .btn-earth {
+        background-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-earth:hover, body.dark-mode .btn-earth:focus {
+        background-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-info {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-info:hover, body.dark-mode .btn-info:focus {
+        background-color: #fff176 !important;
+        border-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-primary {
+        background-color: #8bc34a !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-primary:hover, body.dark-mode .btn-primary:focus {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode h2, body.dark-mode h3 {
+        color: #ffd600 !important;
+    }
+</style>
+
 <h2>Agent Dashboard</h2>
 {% with messages = get_flashed_messages(with_categories=true) %}
 {% if messages %}
@@ -17,7 +106,7 @@
 
 <h3>Assigned Pickup Requests</h3>
 {% if assigned_pickups %}
-<table class="table">
+<table class="table earth-table">
     <thead>
         <tr>
             <th>Request ID</th>

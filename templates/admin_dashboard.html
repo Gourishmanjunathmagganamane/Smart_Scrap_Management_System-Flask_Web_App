@@ -3,36 +3,119 @@
 {% block title %}Admin Dashboard{% endblock %}
 
 {% block content %}
-<h2>Admin Dashboard</h2>
+<style>
+    /* Remove body background override so base.html controls it */
+    /* body {
+        background-color: #e8f5e9 !important;
+    } */
+    .earth-card {
+        background: linear-gradient(135deg, #a5d6a7 60%, #d7ccc8 100%);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.12);
+        color: #1b5e20;
+        margin-bottom: 1rem;
+    }
+    .earth-header {
+        background: #388e3c;
+        color: #fff;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        font-weight: bold;
+    }
+    .earth-table th {
+        background: #388e3c;
+        color: #fff;
+        border-color: #388e3c;
+    }
+    .earth-table td {
+        background: #f1f8e9;
+        color: #2e7d32;
+    }
+    .btn-earth {
+        background-color: #388e3c;
+        color: #fff;
+        border: none;
+    }
+    .btn-earth:hover {
+        background-color: #2e7d32;
+        color: #fff;
+    }
+    .btn-earth-outline {
+        border: 2px solid #388e3c;
+        color: #388e3c;
+        background: transparent;
+    }
+    .btn-earth-outline:hover {
+        background: #388e3c;
+        color: #fff;
+    }
+    /* Dark mode overrides */
+    body.dark-mode .earth-card {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .earth-header {
+        background: #111 !important;
+        color: #ffd600 !important;
+    }
+    body.dark-mode .earth-table th {
+        background: #222 !important;
+        color: #ffd600 !important;
+        border-color: #ffd600 !important;
+    }
+    body.dark-mode .earth-table td {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .btn-earth {
+        background-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-earth:hover {
+        background-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-earth-outline {
+        border: 2px solid #ffd600 !important;
+        color: #ffd600 !important;
+        background: transparent !important;
+    }
+    body.dark-mode .btn-earth-outline:hover {
+        background: #ffd600 !important;
+        color: #23272a !important;
+    }
+</style>
+
+<h2 class="mb-4" style="color:#1b5e20;">Admin Dashboard</h2>
 
 <div class="row">
     <div class="col-md-3">
-        <div class="card bg-light mb-3">
-            <div class="card-header">Total Users</div>
+        <div class="card earth-card">
+            <div class="card-header earth-header">Total Users</div>
             <div class="card-body">
                 <h4 class="card-title">{{ total_users }}</h4>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-light mb-3">
-            <div class="card-header">Total Scrap Items Listed</div>
+        <div class="card earth-card">
+            <div class="card-header earth-header">Total Scrap Items Listed</div>
             <div class="card-body">
                 <h4 class="card-title">{{ total_scrap_items }}</h4>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-light mb-3">
-            <div class="card-header">Pending Pickup Requests</div>
+        <div class="card earth-card">
+            <div class="card-header earth-header">Pending Pickup Requests</div>
             <div class="card-body">
                 <h4 class="card-title">{{ pending_pickups_count }}</h4>
             </div>
         </div>
     </div>
     <div class="col-md-3">
-        <div class="card bg-light mb-3">
-            <div class="card-header">Total Transactions</div>
+        <div class="card earth-card">
+            <div class="card-header earth-header">Total Transactions</div>
             <div class="card-body">
                 <h4 class="card-title">{{ total_transactions }}</h4>
             </div>
@@ -40,9 +123,9 @@
     </div>
 </div>
 
-<h3>All Pickup Requests</h3>
+<h3 class="mt-4" style="color:#388e3c;">All Pickup Requests</h3>
 {% if all_pickup_requests %}
-<table class="table table-bordered">
+<table class="table table-bordered earth-table">
     <thead>
         <tr>
             <th>Request ID</th>
@@ -62,17 +145,20 @@
             <td>{{ request.status }}</td>
             <td>{{ request.agent.name if request.agent else 'Not Assigned' }}</td>
             <td>
-                <a href="{{ url_for('admin_view_pickup', request_id=request.id) }}" class="btn btn-info">Details</a>
+                <a href="{{ url_for('admin_view_pickup', request_id=request.id) }}" class="btn btn-earth btn-sm mb-1">Details</a>
                 {% if request.status == 'Pending' %}
-                <form action="{{ url_for('assign_agent', request_id=request.id) }}" method="POST" class="d-flex">
+                <form action="{{ url_for('assign_agent', request_id=request.id) }}" method="POST" class="d-flex mb-1">
                     <select name="agent_id" class="form-control mr-2" required>
                         <option value="">Select Agent</option>
-                        {% for agent in pickup_agents %} {# Corrected variable name from 'agents' to 'pickup_agents' #}
+                        {% for agent in pickup_agents %}
                         <option value="{{ agent.id }}">{{ agent.name }}</option>
                         {% endfor %}
                     </select>
-                    <button type="submit" class="btn btn-primary">Assign Agent</button>
+                    <button type="submit" class="btn btn-earth-outline btn-sm ml-2">Assign Agent</button>
                 </form>
+                {% endif %}
+                {% if request.transaction %}
+                <a href="{{ url_for('generate_bill', transaction_id=request.transaction.id) }}" target="_blank" class="btn btn-success btn-sm">Generate Bill</a>
                 {% endif %}
             </td>
         </tr>

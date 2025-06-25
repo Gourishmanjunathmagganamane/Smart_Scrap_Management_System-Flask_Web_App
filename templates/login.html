@@ -3,6 +3,83 @@
 {% block title %}Login{% endblock %}
 
 {% block content %}
+    <style>
+        /* Remove body background override so base.html controls it */
+        /* body {
+            background-color: #e8f5e9 !important;
+        } */
+        h2 {
+            color: #1b5e20;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            color: #388e3c;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background-color: #388e3c;
+            border-color: #388e3c;
+            color: #fff;
+        }
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: #fff;
+        }
+        .btn-secondary {
+            background-color: #d7ccc8;
+            color: #388e3c;
+            border: none;
+        }
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: #a5d6a7;
+            color: #1b5e20;
+        }
+        form {
+            background: #a5d6a7;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.10);
+            padding: 2rem;
+            max-width: 400px;
+            margin: 2rem auto;
+        }
+        /* Dark mode overrides */
+        body.dark-mode h2 {
+            color: #ffd600 !important;
+        }
+        body.dark-mode .form-group label {
+            color: #ffd600 !important;
+        }
+        body.dark-mode form {
+            background: #23272a !important;
+            color: #f1f8e9 !important;
+            box-shadow: 0 2px 8px rgba(255, 214, 0, 0.10);
+        }
+        body.dark-mode .btn-primary {
+            background-color: #ffd600 !important;
+            border-color: #ffd600 !important;
+            color: #23272a !important;
+        }
+        body.dark-mode .btn-primary:hover, body.dark-mode .btn-primary:focus {
+            background-color: #fff176 !important;
+            border-color: #fff176 !important;
+            color: #23272a !important;
+        }
+        body.dark-mode .btn-secondary {
+            background-color: #444 !important;
+            color: #ffd600 !important;
+        }
+        body.dark-mode .btn-secondary:hover, body.dark-mode .btn-secondary:focus {
+            background-color: #23272a !important;
+            color: #ffd600 !important;
+        }
+        body.dark-mode input.form-control {
+            background: #23272a !important;
+            color: #ffd600 !important;
+            border-color: #ffd600 !important;
+        }
+    </style>
     <h2>Login</h2>
     <form method="POST" action="{{ url_for('login') }}">
         <div class="form-group">

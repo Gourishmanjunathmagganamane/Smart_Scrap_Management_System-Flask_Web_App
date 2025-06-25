@@ -3,6 +3,137 @@
 {% block title %}My Listings{% endblock %}
 
 {% block content %}
+<style>
+    /* Remove body background override so base.html controls it */
+    /* body {
+        background-color: #e8f5e9 !important;
+    } */
+    h2 {
+        color: #1b5e20;
+        margin-top: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    .table th {
+        background: #388e3c;
+        color: #fff;
+        border-color: #388e3c;
+    }
+    .table td {
+        background: #f1f8e9;
+        color: #2e7d32;
+    }
+    .btn-success {
+        background-color: #388e3c;
+        border-color: #388e3c;
+        color: #fff;
+    }
+    .btn-success:hover, .btn-success:focus {
+        background-color: #2e7d32;
+        border-color: #2e7d32;
+        color: #fff;
+    }
+    .btn-primary {
+        background-color: #8bc34a;
+        border-color: #558b2f;
+        color: #1b5e20;
+    }
+    .btn-primary:hover, .btn-primary:focus {
+        background-color: #558b2f;
+        border-color: #33691e;
+        color: #fff;
+    }
+    .btn-info {
+        background-color: #43a047;
+        border-color: #388e3c;
+        color: #fff;
+    }
+    .btn-info:hover, .btn-info:focus {
+        background-color: #2e7d32;
+        border-color: #2e7d32;
+        color: #fff;
+    }
+    .btn-danger {
+        background-color: #a1887f;
+        border-color: #6d4c41;
+        color: #fff;
+    }
+    .btn-danger:hover, .btn-danger:focus {
+        background-color: #6d4c41;
+        border-color: #4e342e;
+        color: #fff;
+    }
+    .btn-secondary {
+        background-color: #d7ccc8;
+        color: #388e3c;
+        border: none;
+    }
+    .btn-secondary:hover, .btn-secondary:focus {
+        background-color: #a5d6a7;
+        color: #1b5e20;
+    }
+    /* Dark mode overrides */
+    body.dark-mode h2 {
+        color: #ffd600 !important;
+    }
+    body.dark-mode .table th {
+        background: #222 !important;
+        color: #ffd600 !important;
+        border-color: #ffd600 !important;
+    }
+    body.dark-mode .table td {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .btn-success {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-success:hover, body.dark-mode .btn-success:focus {
+        background-color: #fff176 !important;
+        border-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-primary {
+        background-color: #8bc34a !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-primary:hover, body.dark-mode .btn-primary:focus {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-info {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-info:hover, body.dark-mode .btn-info:focus {
+        background-color: #fff176 !important;
+        border-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-danger {
+        background-color: #a1887f !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-danger:hover, body.dark-mode .btn-danger:focus {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-secondary {
+        background-color: #444 !important;
+        color: #ffd600 !important;
+    }
+    body.dark-mode .btn-secondary:hover, body.dark-mode .btn-secondary:focus {
+        background-color: #23272a !important;
+        color: #ffd600 !important;
+    }
+</style>
+
 <a href="/add_scrap_item" class="btn btn-success mt-3">Add New Scrap Item</a>
 <a href="{{ url_for('seller_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
 

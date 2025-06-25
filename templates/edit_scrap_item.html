@@ -3,21 +3,91 @@
 {% block title %}Edit Scrap Item{% endblock %}
 
 {% block content %}
+<style>
+    /* Remove body background override so base.html controls it */
+    /* body {
+        background-color: #e8f5e9 !important;
+    } */
+    .green-card {
+        background: #a5d6a7;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.15);
+        padding: 2rem;
+        max-width: 500px;
+        margin: 2rem auto;
+    }
+    .green-label {
+        color: #1b5e20;
+        font-weight: 600;
+    }
+    .btn-green {
+        background-color: #388e3c;
+        color: #fff;
+        border: none;
+    }
+    .btn-green:hover {
+        background-color: #2e7d32;
+        color: #fff;
+    }
+    .btn-cancel {
+        background-color: #d7ccc8;
+        color: #388e3c;
+        border: none;
+    }
+    .btn-cancel:hover {
+        background-color: #a5d6a7;
+        color: #1b5e20;
+    }
+    h2 {
+        color: #1b5e20;
+        text-align: center;
+        margin-bottom: 1.5rem;
+    }
+    /* Dark mode overrides */
+    body.dark-mode .green-card {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .green-label {
+        color: #ffd600 !important;
+    }
+    body.dark-mode .btn-green {
+        background-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-green:hover {
+        background-color: #fff176 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-cancel {
+        background-color: #444 !important;
+        color: #ffd600 !important;
+    }
+    body.dark-mode .btn-cancel:hover {
+        background-color: #23272a !important;
+        color: #ffd600 !important;
+    }
+    body.dark-mode h2 {
+        color: #ffd600 !important;
+    }
+</style>
+<div class="green-card">
     <h2>Edit Scrap Item</h2>
     <form method="POST" action="/edit_scrap_item/{{ item.id }}">
         <div class="form-group">
-            <label for="scrap_type">Scrap Type:</label>
+            <label for="scrap_type" class="green-label">Scrap Type:</label>
             <input type="text" class="form-control" id="scrap_type" name="scrap_type" value="{{ item.scrap_type }}" required>
         </div>
         <div class="form-group">
-            <label for="weight_kg">Weight (in kg):</label>
+            <label for="weight_kg" class="green-label">Weight (in kg):</label>
             <input type="number" class="form-control" id="weight_kg" name="weight_kg" step="0.01" value="{{ item.weight_kg }}" required>
         </div>
         <div class="form-group">
-            <label for="price_per_kg">Price per kg:</label>
+            <label for="price_per_kg" class="green-label">Price per kg:</label>
             <input type="number" class="form-control" id="price_per_kg" name="price_per_kg" step="0.01" value="{{ item.price_per_kg }}" required>
         </div>
-        <button type="submit" class="btn btn-primary">Update Item</button>
-        <a href="{{ url_for('view_my_listings') }}" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-green mt-2">Update Item</button>
+        <a href="{{ url_for('view_my_listings') }}" class="btn btn-cancel mt-2">Cancel</a>
     </form>
+</div>
 {% endblock %}

@@ -3,6 +3,58 @@
 {% block title %}Seller Dashboard{% endblock %}
 
 {% block content %}
+    <style>
+        /* Remove body background override so base.html controls it */
+        /* body {
+            background-color: #e8f5e9 !important;
+        } */
+        h2 {
+            color: #1b5e20;
+            margin-top: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        .btn-primary {
+            background-color: #388e3c;
+            border-color: #388e3c;
+            color: #fff;
+        }
+        .btn-primary:hover, .btn-primary:focus {
+            background-color: #2e7d32;
+            border-color: #2e7d32;
+            color: #fff;
+        }
+        .btn-secondary {
+            background-color: #d7ccc8;
+            color: #388e3c;
+            border: none;
+        }
+        .btn-secondary:hover, .btn-secondary:focus {
+            background-color: #a5d6a7;
+            color: #1b5e20;
+        }
+        /* Dark mode overrides */
+        body.dark-mode h2 {
+            color: #ffd600 !important;
+        }
+        body.dark-mode .btn-primary {
+            background-color: #ffd600 !important;
+            border-color: #ffd600 !important;
+            color: #23272a !important;
+        }
+        body.dark-mode .btn-primary:hover, body.dark-mode .btn-primary:focus {
+            background-color: #fff176 !important;
+            border-color: #fff176 !important;
+            color: #23272a !important;
+        }
+        body.dark-mode .btn-secondary {
+            background-color: #444 !important;
+            color: #ffd600 !important;
+        }
+        body.dark-mode .btn-secondary:hover, body.dark-mode .btn-secondary:focus {
+            background-color: #23272a !important;
+            color: #ffd600 !important;
+        }
+    </style>
     <h2>Welcome, Seller!</h2>
     <p>Select an action below:</p>
     

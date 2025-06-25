@@ -3,29 +3,84 @@
 {% block title %}Pickup Details{% endblock %}
 
 {% block content %}
-    <h2>Pickup Request Details</h2>
+<style>
+    /* Remove body background override so base.html controls it */
+    /* body {
+        background-color: #e8f5e9 !important;
+    } */
+    .card {
+        background: linear-gradient(135deg, #a5d6a7 70%, #d7ccc8 100%);
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(76, 175, 80, 0.10);
+        color: #1b5e20;
+    }
+    .card-header {
+        background: #388e3c;
+        color: #fff;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
+        font-weight: bold;
+    }
+    h2 {
+        color: #1b5e20;
+    }
+    .btn-secondary {
+        background-color: #8bc34a !important;
+        border-color: #558b2f !important;
+        color: #1b5e20 !important;
+    }
+    .btn-secondary:hover, .btn-secondary:focus {
+        background-color: #558b2f !important;
+        border-color: #33691e !important;
+        color: #fff !important;
+    }
+    /* Dark mode overrides */
+    body.dark-mode .card {
+        background: #23272a !important;
+        color: #f1f8e9 !important;
+    }
+    body.dark-mode .card-header {
+        background: #222 !important;
+        color: #ffd600 !important;
+    }
+    body.dark-mode h2 {
+        color: #ffd600 !important;
+    }
+    body.dark-mode .btn-secondary {
+        background-color: #ffd600 !important;
+        border-color: #ffd600 !important;
+        color: #23272a !important;
+    }
+    body.dark-mode .btn-secondary:hover, body.dark-mode .btn-secondary:focus {
+        background-color: #fff176 !important;
+        border-color: #fff176 !important;
+        color: #23272a !important;
+    }
+</style>
 
-    <div class="card mb-3">
-        <div class="card-header">Request ID: {{ pickup_request.id }}</div>
-        <div class="card-body">
-            <p><strong>Seller:</strong> {{ pickup_request.seller.name }} ({{ pickup_request.seller.email }})</p>
-            <p><strong>Request Date:</strong> {{ pickup_request.request_date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
-            <p><strong>Desired Pickup Date:</strong> {{ pickup_request.pickup_date }}</p>
-            <p><strong>Status:</strong> {{ pickup_request.status }}</p>
-            {% if pickup_request.agent %}
-                <p><strong>Assigned Agent:</strong> {{ pickup_request.agent.name }} ({{ pickup_request.agent.email }})</p>
-            {% endif %}
-        </div>
+<h2>Pickup Request Details</h2>
+
+<div class="card mb-3">
+    <div class="card-header">Request ID: {{ pickup_request.id }}</div>
+    <div class="card-body">
+        <p><strong>Seller:</strong> {{ pickup_request.seller.name }} ({{ pickup_request.seller.email }})</p>
+        <p><strong>Request Date:</strong> {{ pickup_request.request_date.strftime('%Y-%m-%d %H:%M:%S') }}</p>
+        <p><strong>Desired Pickup Date:</strong> {{ pickup_request.pickup_date }}</p>
+        <p><strong>Status:</strong> {{ pickup_request.status }}</p>
+        {% if pickup_request.agent %}
+            <p><strong>Assigned Agent:</strong> {{ pickup_request.agent.name }} ({{ pickup_request.agent.email }})</p>
+        {% endif %}
     </div>
+</div>
 
-    <div class="card mb-3">
-        <div class="card-header">Scrap Item Details</div>
-        <div class="card-body">
-            <p><strong>Scrap Type:</strong> {{ pickup_request.scrap_item.scrap_type }}</p>
-            <p><strong>Listed Weight:</strong> {{ pickup_request.scrap_item.weight_kg }} kg</p>
-            <p><strong>Price per kg:</strong> {{ pickup_request.scrap_item.price_per_kg }}</p>
-        </div>
+<div class="card mb-3">
+    <div class="card-header">Scrap Item Details</div>
+    <div class="card-body">
+        <p><strong>Scrap Type:</strong> {{ pickup_request.scrap_item.scrap_type }}</p>
+        <p><strong>Listed Weight:</strong> {{ pickup_request.scrap_item.weight_kg }} kg</p>
+        <p><strong>Price per kg:</strong> {{ pickup_request.scrap_item.price_per_kg }}</p>
     </div>
+</div>
 
-    <a href="{{ url_for('agent_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+<a href="{{ url_for('agent_dashboard') }}" class="btn btn-secondary mt-3">Back to Dashboard</a>
 {% endblock %}

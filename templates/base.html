@@ -5,10 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #e8f5e9 !important;
+        }
+        /* Floating full-width navbar bar strip with rounded ends and margin */
+        .navbar {
+            background-color: #388e3c !important;
+            background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="9" width="2" height="20" fill="%23a1887f" fill-opacity="0.15"/><rect y="9" width="20" height="2" fill="%23a1887f" fill-opacity="0.15"/></svg>');
+            background-size: 40px 40px;
+            border-radius: 2rem;
+            margin: 24px 24px 0 24px; /* top, right, bottom, left */
+            width: calc(100vw - 48px); /* full width minus left/right margin */
+            box-shadow: 0 8px 32px rgba(56,142,60,0.18), 0 1.5px 8px rgba(56,142,60,0.10);
+            padding-left: 2rem;
+            padding-right: 2rem;
+            min-height: 64px;
+            position: relative;
+            z-index: 10;
+        }
+        .navbar-brand, .navbar-nav .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+        .navbar-brand:hover, .navbar-nav .nav-link:hover {
+            color: #c5e1a5 !important;
+        }
+        .navbar-light .navbar-toggler {
+            border-color: #388e3c;
+        }
+        .container {
+            background: #f1f8e9;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.10);
+            padding: 2rem 1.5rem;
+            margin-top: 2.5rem;
+        }
+        /* Center nav links */
+        .navbar-nav {
+            margin-left: auto;
+            margin-right: auto;
+        }
+        /* Hide theme toggle button border on focus */
+        #theme-toggle:focus {
+            outline: none;
+            box-shadow: none;
+        }
+        @media (max-width: 991.98px) {
+            .navbar {
+                width: calc(100vw - 16px);
+                margin-left: 8px;
+                margin-right: 8px;
+                border-radius: 1.2rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+        }
+        .green-card { background: #23272a !important; color: #f1f8e9 !important; }
+        .green-label { color: #ffd600 !important; }
+        .btn-green { background-color: #ffd600 !important; color: #23272a !important; }
+        .btn-green:hover { background-color: #fff176 !important; color: #23272a !important; }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="/">Scrap App</a>
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+            <span style="background:#fff; border-radius:50%; padding:4px; box-shadow:0 2px 6px rgba(56,142,60,0.10); display:inline-flex; align-items:center; margin-right:0.6rem;">
+                <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3 L24 13 H14 L19 3 Z" fill="#388e3c"/>
+                    <circle cx="19" cy="24" r="7" fill="#a1887f" stroke="#388e3c" stroke-width="2"/>
+                    <polygon points="19,17 21,22 18,22 20,27" fill="#ffd600" stroke="#fbc02d" stroke-width="1"/>
+                    <ellipse cx="13" cy="19" rx="2" ry="1" fill="#8bc34a" />
+                    <ellipse cx="25" cy="19" rx="2" ry="1" fill="#8bc34a" />
+                </svg>
+            </span>
+            <span style="font-weight:700; letter-spacing:1px; color:#fff; font-size:1.3rem;">
+                Scrap <span style="color:#ffd600;">A</span><span style="color:#a1887f;">p</span><span style="color:#8bc34a;">p</span>
+            </span>
+        </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -27,6 +101,24 @@
                     </li>
                 {% endif %}
             </ul>
+            <!-- Theme toggle button at the end, right side -->
+            <div class="d-flex align-items-center ml-auto">
+                <button id="theme-toggle" aria-label="Toggle dark mode" style="background:none; border:none; outline:none; cursor:pointer; padding:0; margin-left:1.2rem;">
+                    <svg id="theme-icon" width="28" height="28" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="5" fill="#FFD600"/>
+                        <g stroke="#FFD600" stroke-width="2">
+                            <line x1="12" y1="2" x2="12" y2="5"/>
+                            <line x1="12" y1="19" x2="12" y2="22"/>
+                            <line x1="2" y1="12" x2="5" y2="12"/>
+                            <line x1="19" y1="12" x2="22" y2="12"/>
+                            <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+                            <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+                            <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+                            <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                        </g>
+                    </svg>
+                </button>
+            </div>
         </div>
     </nav>
     <div class="container mt-4">
@@ -35,5 +127,53 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+    const toggleBtn = document.getElementById('theme-toggle');
+    const icon = document.getElementById('theme-icon');
+    const darkCSS = `
+        body { background-color: #23272a !important; color: #f1f8e9 !important; }
+        .container { background: #23272a !important; color: #f1f8e9 !important; }
+        .card, .table, .modal-content { background: #23272a !important; color: #f1f8e9 !important; }
+        .navbar { background-color: #222 !important; background-image: none !important; }
+        .navbar-brand, .navbar-nav .nav-link { color: #ffd600 !important; }
+        .navbar .nav-link.active, .navbar .nav-link:focus, .navbar .nav-link:hover { color: #fff !important; }
+        .green-card { background: #23272a !important; color: #f1f8e9 !important; }
+        .green-label { color: #ffd600 !important; }
+        .btn-green { background-color: #ffd600 !important; color: #23272a !important; }
+        .btn-green:hover { background-color: #fff176 !important; color: #23272a !important; }
+    `;
+    let darkMode = false;
+    let styleTag = null;
+
+    toggleBtn.onclick = function() {
+        darkMode = !darkMode;
+        if (darkMode) {
+            // Switch to moon icon
+            icon.innerHTML = `<path d="M21 12.79A9 9 0 0111.21 3a7 7 0 100 14 9 9 0 009.79-4.21z" fill="#FFD600"/>`;
+            // Apply dark CSS
+            styleTag = document.createElement('style');
+            styleTag.id = 'dark-mode-style';
+            styleTag.innerHTML = darkCSS;
+            document.head.appendChild(styleTag);
+        } else {
+            // Switch to sun icon
+            icon.innerHTML = `
+                <circle cx="12" cy="12" r="5" fill="#FFD600"/>
+                <g stroke="#FFD600" stroke-width="2">
+                    <line x1="12" y1="2" x2="12" y2="5"/>
+                    <line x1="12" y1="19" x2="12" y2="22"/>
+                    <line x1="2" y1="12" x2="5" y2="12"/>
+                    <line x1="19" y1="12" x2="22" y2="12"/>
+                    <line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/>
+                    <line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/>
+                    <line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/>
+                    <line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/>
+                </g>
+            `;
+            // Remove dark CSS
+            if (styleTag) styleTag.remove();
+        }
+    };
+    </script>
 </body>
 </html>
